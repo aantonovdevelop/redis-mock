@@ -42,9 +42,8 @@ describe('Redis', function () {
     describe('#del', function () {
         it('Should delete value from db', function (done) {
             var test_key = 'test_key';
-            var test_value = 'test_value';
 
-            redis.store[test_key] = test_value;
+            redis.store[test_key] = 'test_value';
 
             redis.del(test_key, function (error) {
                 assert.equal(error, null);
