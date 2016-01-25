@@ -1,5 +1,5 @@
 {
-  "name": "aa-redis-mock",
+  "name": "@aantonov/redis-mock",
   "version": "0.0.1",
   "description": "Redis mock for tests",
   "main": "index.js",
