@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('assert');
-var redis = require('../mocks/redis.js');
+var redis = require('../src/redis.js');
 
 describe('Redis', function () {
     beforeEach(function () {
