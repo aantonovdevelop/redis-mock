@@ -11,5 +11,8 @@
     "url": "https://"
   },
   "author": "Artem Antonov <aantonov.develop@gmail.com> (http://24develop.ru)",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^2.3.4"
+  }
 }
