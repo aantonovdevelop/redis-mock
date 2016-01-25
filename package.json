@@ -1,0 +1,15 @@
+{
+  "name": "aa-redis-mock",
+  "version": "0.0.1",
+  "description": "Redis mock for tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://"
+  },
+  "author": "Artem Antonov <aantonov.develop@gmail.com> (http://24develop.ru)",
+  "license": "ISC"
+}
