@@ -11,7 +11,7 @@
     "url": "https://github.com/aantonovdevelop/redis-mock.git"
   },
   "author": "Artem Antonov <aantonov.develop@gmail.com> (http://24develop.ru)",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "mocha": "^2.3.4"
   }
