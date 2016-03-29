@@ -4,7 +4,7 @@
   "description": "Redis mock for tests",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "mocha test"
   },
   "repository": {
     "type": "git",
