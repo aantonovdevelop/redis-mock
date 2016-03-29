@@ -4,7 +4,8 @@
   "description": "Redis mock for tests",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha test",
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
@@ -13,6 +14,8 @@
   "author": "Artem Antonov <aantonov.develop@gmail.com> (http://24develop.ru)",
   "license": "MIT",
   "devDependencies": {
+    "coveralls": "^2.11.9",
+    "istanbul": "^0.4.2",
     "mocha": "^2.3.4"
   }
 }
