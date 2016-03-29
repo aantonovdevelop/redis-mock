@@ -182,4 +182,76 @@ describe('Redis', function () {
             });
         });
     });
+
+    describe('#hset', function () {
+        var hashkey = 'hashkey';
+
+        var hashfield_1 = 'field_1';
+        var hashfield_2 = 'field_2';
+
+        var hashvalue_1 = 'value_1';
+        var hashvalue_2 = 'value_2';
+
+        it('Should set hash item', function(done) {
+            redis.hset(hashkey, hashfield_1, hashvalue_1, function (error) {
+                if (error) {
+                    return done(error);
+                }
+
+                redis.hset(hashkey, hashfield_2, hashvalue_2, function (error) {
+                    done(error);
+                });
+            });
+        });
+
+        after('Check db values', function () {
+            assert.equal(redis.store[hashkey] instanceof Array, true);
+
+            assert.equal(redis.store[hashkey][hashfield_1], hashvalue_1);
+            assert.equal(redis.store[hashkey][hashfield_2], hashvalue_2);
+        });
+    });
+
+    describe('#hget', function () {
+        var hashkey = 'hashkey';
+        var hashfield = 'hashfield';
+        var hashvalue = 'hashvalue';
+
+        it('Should return value of hash field', function (done) {
+            redis.store[hashkey] = [];
+            redis.store[hashkey][hashfield] = hashvalue;
+
+            redis.hget(hashkey, hashfield, function (error, result) {
+                assert.equal(error, null);
+                assert.equal(result, hashvalue);
+
+                done();
+            });
+        });
+    });
+
+    describe('#hgetall', function () {
+        var hashkey = 'hashkey';
+
+        var hashfield_1 = 'field_1';
+        var hashfield_2 = 'field_2';
+
+        var hashvalue_1 = 'value_1';
+        var hashvalue_2 = 'value_2';
+
+        it('Should get all fields of hash', function (done) {
+            redis.store[hashkey] = [];
+            redis.store[hashkey][hashfield_1] = hashvalue_1;
+            redis.store[hashkey][hashfield_2] = hashvalue_2;
+
+            redis.hgetall(hashkey, function (error, result) {
+                assert.equal(error, null);
+
+                assert.equal(result[hashfield_1], hashvalue_1);
+                assert.equal(result[hashfield_2], hashvalue_2);
+
+                done();
+            });
+        });
+    });
 });

@@ -122,6 +122,48 @@ function Redis() {
             callback(null, result);
         }
     };
+
+    this.hset = function (key, field, value, callback) {
+
+        if (!key || !field || !value) {
+            return callback(new Error('Wrong arguments'));
+        }
+
+        if (!this.store[key]) {
+            this.store[key] = [];
+        }
+
+        this.store[key][field] = value;
+
+        return callback(null);
+    };
+
+    this.hget = function (key, field, callback) {
+        if (!key || !field) {
+            return callback(new Error('Wrong arguments'));
+        }
+
+        if (!this.store[key]) {
+            return callback(null, null);
+        }
+
+        callback(null, this.store[key][field]);
+    };
+
+    this.hgetall = function (key, callback) {
+        if (!this.store[key]) {
+            return callback(null, null);
+        }
+
+        var self = this;
+        var result = {};
+
+        Object.keys(this.store[key]).forEach(function (item) {
+            result[item] = self.store[key][item];
+        });
+
+        callback(null, result);
+    };
 }
 
 module.exports = new Redis();
