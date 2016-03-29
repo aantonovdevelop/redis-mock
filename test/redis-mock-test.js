@@ -254,4 +254,22 @@ describe('Redis', function () {
             });
         });
     });
+    
+    describe('#watch', function () {
+        it('Should exec callback function', function (done) {
+            redis.watch('some_key', done);
+        });
+    });
+    
+    describe('#multi', function () {
+        it('Should return redis object', function () {
+            assert.equal(redis.multi(), redis);
+        });
+    });
+    
+    describe('#exec', function () {
+        it('Should exec callback function', function (done) {
+            redis.exec(done);
+        });
+    });
 });
