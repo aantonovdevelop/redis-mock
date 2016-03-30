@@ -1,4 +1,4 @@
-#Redis-mock
+#redis-mock
 
 [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
@@ -7,3 +7,29 @@
 
 [coveralls-image]: https://coveralls.io/repos/aantonovdevelop/redis-mock/badge.svg?branch=master&service=github
 [coveralls-url]: https://coveralls.io/github/aantonovdevelop/redis-mock?branch=master
+
+## Installation
+
+``` bash
+    $ [sudo] npm install --save @aantonov/redis-mock
+```
+
+## Usage
+
+``` js
+    var assert = require('assert');
+    var redis_client = require('@aantonov/redis-mock');
+    
+    it ('Should save string value', (done) => {
+        var test_key = 'test_key',
+            test_val = 'test_val';
+            
+        redis_client.set(test_key, test_val, (err) => {
+            if (err) return done(err);
+            
+            assert.equal(redis.store[test_key], test_val);
+            
+            done();
+        });
+    });
+```
