@@ -1,6 +1,9 @@
 #redis-mock
 
-[![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]
+
+[npm-image]: https://badge.fury.io/js/%40aantonov%2Fredis-mock.svg
+[npm-url]: https://badge.fury.io/js/%40aantonov%2Fredis-mock
 
 [travis-image]: https://travis-ci.org/aantonovdevelop/redis-mock.svg?branch=master
 [travis-url]: https://travis-ci.org/aantonovdevelop/redis-mock
