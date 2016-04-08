@@ -24,6 +24,36 @@ describe('Redis', function () {
             });
         });
     });
+    
+    describe('#get', function () {
+        it('Should return values for many keys', function (done) {
+            var test_key_1 = 'test_key_1';
+            var test_value_1 = '1';
+            
+            var test_key_2 = 'test_key_2';
+            var test_value_2 = '2';
+            
+            var test_key_3 = 'test_key_3';
+            var test_value_3 = '3';
+            
+            redis.store[test_key_1] = test_value_1;
+            redis.store[test_key_2] = test_value_2;
+            redis.store[test_key_3] = test_value_3;
+            
+            redis.mget([test_key_1, test_key_2, test_key_3], function (error, values) {
+                assert.equal(error, null);
+                assert.ok(values);
+                assert.ok(values instanceof Array);
+                assert.equal(values.length, 3);
+                
+                assert.equal(values[0], 1);
+                assert.equal(values[1], 2);
+                assert.equal(values[2], 3);
+                
+                done();
+            });
+        });
+    });
 
     describe('#set', function () {
         it('Should save value into db', function (done) {

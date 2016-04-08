@@ -11,6 +11,17 @@ function Redis() {
 
         return this;
     };
+    
+    this.mget = function (keys, callback) {
+        var self = this;
+        var result = [];
+        
+        keys.forEach(function (key) {
+            result.push(self.store[key] || null);
+        });
+        
+        callback(null, result);
+    };
 
     this.set = function (key, object, callback) {
         this.store[key] = object;
