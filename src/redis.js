@@ -149,6 +149,12 @@ function Redis() {
         return callback(null);
     };
 
+    this.hmset = function (key, object, callback) {
+        this.store[key] = object;
+        
+        callback();
+    };
+    
     this.hget = function (key, field, callback) {
         if (!key || !field) {
             return callback(new Error('Wrong arguments'));

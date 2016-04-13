@@ -242,6 +242,23 @@ describe('Redis', function () {
         });
     });
 
+    describe('#hmset', function () {
+        it('Should save object into db', function (done) {
+            var hashkey = 'hashkey';
+            var object = {
+                id: 1,
+                name: 'some_name'
+            };
+            
+            redis.hmset(hashkey, object, function () {
+                assert.equal(redis.store[hashkey].id, object.id);
+                assert.equal(redis.store[hashkey].name, object.name);
+                
+                done();
+            });
+        });
+    });
+    
     describe('#hget', function () {
         var hashkey = 'hashkey';
         var hashfield = 'hashfield';
