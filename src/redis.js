@@ -181,6 +181,17 @@ function Redis() {
 
         callback(null, result);
     };
+    
+    this.keys = function (pattern, callback) {
+        var exp = new RegExp('^' + pattern.replace('*', '.*') + '$');
+        var result = [];
+        
+        Object.keys(this.store).forEach(function (key) {
+            exp.test(key) ? result.push(key) : null
+        });
+        
+        callback(null, result);
+    };
 }
 
 module.exports = new Redis();

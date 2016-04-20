@@ -319,4 +319,23 @@ describe('Redis', function () {
             redis.exec(done);
         });
     });
+    
+    describe('keys', function () {
+        it('Should return keys by pattern', function (done) {
+            redis.store['test:key:1'] = 1;
+            redis.store['test:key:2'] = 1;
+            redis.store['test:key:3'] = 1;
+            
+            redis.keys('test:key:*', function (error, result) {
+                assert.equal(error, null);
+                assert.equal(result.length, 3);
+                
+                assert.equal(result[0], 'test:key:1');
+                assert.equal(result[1], 'test:key:2');
+                assert.equal(result[2], 'test:key:3');
+                
+                done();
+            });
+        });
+    });
 });
