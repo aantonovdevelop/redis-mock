@@ -70,22 +70,33 @@ function Redis() {
 
         var self = this;
         
-        function _save_value(arr, value) {
+        function save_value(arr, value) {
             arr.push(value);
         }
 
         if (this.store[key]) {
-            if (this.store[key] instanceof Array) {
-                _save_value(this.store[key], object);
-
-                return done(null);
-            } else {
+            
+            if (!(this.store[key] instanceof Array)) {
                 return done(new Error());
             }
+            
+            if (object instanceof Array) {
+                object.forEach(save_value);
+            } else {
+                save_value(this.store[key], object);
+            }
+
+            return done(null);
+            
         } else {
+            
             this.store[key] = [];
 
-            _save_value(this.store[key], object);
+            if (object instanceof Array) {
+                this.store[key] = object;
+            } else {
+                save_value(this.store[key], object);
+            }
 
             return done(null);
         }

@@ -118,6 +118,23 @@ describe('Redis', function () {
                 done();
             });
         });
+        
+        it('Should add items in set', function (done) {
+            var test_key = 'test_key';
+            var test_value = [1, 2, 3];
+
+            redis.sadd(test_key, test_value, function (error) {
+                assert.equal(error, null);
+
+                assert.equal(redis.store[test_key] instanceof Array, true);
+                
+                assert.equal(redis.store[test_key][0], test_value[0]);
+                assert.equal(redis.store[test_key][1], test_value[1]);
+                assert.equal(redis.store[test_key][2], test_value[2]);
+
+                done();
+            });
+        });
     });
 
     describe('#smembers', function () {
