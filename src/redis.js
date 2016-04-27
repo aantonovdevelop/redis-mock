@@ -32,7 +32,7 @@ function Redis() {
     this.del = function (key, callback) {
         this.store[key] = null;
 
-        callback();
+        if (callback instanceof Function) callback(); else return this;
     };
 
     this.incr = function (key, callback) {
@@ -57,6 +57,10 @@ function Redis() {
     this.exec = function (callback) {
         callback();
     };
+    
+    this.exec_atom = function (callback) {
+        callback();
+    };
 
     this.exists = function (key, callback) {
         this.store[key] ? callback(null, 1) : callback(null, 0);
@@ -64,6 +68,8 @@ function Redis() {
 
     this.sadd = function (key, object, callback) {
 
+        var self = this;
+        
         function _save_value(arr, value) {
             arr.push(value);
         }
@@ -72,16 +78,20 @@ function Redis() {
             if (this.store[key] instanceof Array) {
                 _save_value(this.store[key], object);
 
-                callback(null);
+                return done(null);
             } else {
-                callback(new Error());
+                return done(new Error());
             }
         } else {
             this.store[key] = [];
 
             _save_value(this.store[key], object);
 
-            callback(null);
+            return done(null);
+        }
+        
+        function done(error) {
+            if (callback instanceof Function) callback(error); else return self;
         }
     };
 

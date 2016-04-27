@@ -312,6 +312,16 @@ describe('Redis', function () {
         it('Should return redis object', function () {
             assert.equal(redis.multi(), redis);
         });
+
+        it('Should exec queue of commands', function (done) {
+            redis.multi().del('someval').sadd('someval', 'val').exec(done);
+        })
+    });
+    
+    describe('#exec_atom', function () {
+        it('Should exec callback function', function (done) {
+            redis.exec_atom(done);
+        })
     });
     
     describe('#exec', function () {
@@ -319,7 +329,7 @@ describe('Redis', function () {
             redis.exec(done);
         });
     });
-    
+
     describe('keys', function () {
         it('Should return keys by pattern', function (done) {
             redis.store['test:key:1'] = 1;
