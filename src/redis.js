@@ -58,7 +58,7 @@ function Redis() {
         callback();
     };
     
-    this.exec_atom = function (callback) {
+    this.exec_atomic = function (callback) {
         callback();
     };
 

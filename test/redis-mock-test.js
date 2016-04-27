@@ -318,9 +318,9 @@ describe('Redis', function () {
         })
     });
     
-    describe('#exec_atom', function () {
+    describe('#exec_atomic', function () {
         it('Should exec callback function', function (done) {
-            redis.exec_atom(done);
+            redis.exec_atomic(done);
         })
     });
     
