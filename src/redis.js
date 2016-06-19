@@ -111,7 +111,7 @@ function Redis() {
     };
     
     this.sismember = function (key, item, callback) {
-        this.store[key].indexOf(item) >= 0 ? callback(null, true) : callback(null, false);
+        this.store[key].indexOf(item) >= 0 ? callback(null, 1) : callback(null, 0);
     };
 
     this.srem = function (key, object, callback) {
