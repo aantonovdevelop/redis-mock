@@ -109,6 +109,10 @@ function Redis() {
     this.smembers = function (key, callback) {
         this.store[key] instanceof Array ? callback(null, this.store[key]) : callback(new Error(), null);
     };
+    
+    this.sismember = function (key, item, callback) {
+        this.store[key].indexOf(item) >= 0 ? callback(null, true) : callback(null, false);
+    };
 
     this.srem = function (key, object, callback) {
         var set = this.store[key];

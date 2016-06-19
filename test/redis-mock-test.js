@@ -153,6 +153,38 @@ describe('Redis', function () {
             });
         });
     });
+    
+    describe('#sismember', function () {
+        it('Should check item in set and return true', function (done) {
+            var test_item = 42,
+                test_key = 'test_key';
+            
+            redis.store = [];
+            redis.store[test_key] = [test_item];
+            
+            redis.sismember(test_key, test_item, function (error, result) {
+                assert.equal(null, error);
+                assert.equal(result, true);
+                
+                done();
+            });
+        });
+        
+        it('Should check item in set and return false', function (done) {
+            var test_item = 42,
+                test_key = 'test_key';
+
+            redis.store = [];
+            redis.store[test_key] = [24];
+
+            redis.sismember(test_key, test_item, function (error, result) {
+                assert.equal(null, error);
+                assert.equal(result, false);
+
+                done();
+            });
+        });
+    });
 
     describe('#srem', function () {
         it('Should remove item from set', function (done) {
