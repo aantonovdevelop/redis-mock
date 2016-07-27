@@ -203,6 +203,16 @@ function Redis() {
         callback(null, result);
     };
     
+    this.hincrby = function (key, field, value, callback) {
+        if(!this.store[key]) {
+            callback(new Error('Wrong key or field'), null);
+        }
+        
+        this.store[key][field] += value;
+        
+        callback(null, this.store[key][field]);
+    };
+    
     this.keys = function (pattern, callback) {
         var exp = new RegExp('^' + pattern.replace('*', '.*') + '$');
         var result = [];

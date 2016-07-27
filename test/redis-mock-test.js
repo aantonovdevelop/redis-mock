@@ -319,6 +319,32 @@ describe('Redis', function () {
         });
     });
     
+    describe('#hincrby', function () {
+        it('Should increment and decrement field', function (done) {
+            redis.store = [];
+            
+            var key = 'hashkey';
+            
+            redis.store[key] = {
+                field: 0
+            };
+            
+            redis.hincrby(key, 'field', 10, function (error, result) {
+                assert.equal(error, null);
+                assert.equal(result, 10);
+                assert.equal(redis.store[key].field, 10);
+                
+                redis.hincrby(key, 'field', -3, function (error, result) {
+                    assert.equal(error, null);
+                    assert.equal(result, 7);
+                    assert.equal(redis.store[key].field, 7);
+                    
+                    done();
+                });
+            });
+        });
+    });
+    
     describe('#watch', function () {
         it('Should exec callback function', function (done) {
             redis.watch('some_key', done);
