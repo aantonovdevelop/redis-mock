@@ -216,6 +216,16 @@ function Redis() {
         
         callback(null, this.store[key][field]);
     };
+
+    this.hdel = function (key, field, callback) {
+        try {
+            delete this.store[key][field];
+        } catch (error) {
+            callback(error);
+        }
+
+        callback(null);
+    };
     
     this.keys = function (pattern, callback) {
         var exp = new RegExp('^' + pattern.replace('*', '.*') + '$');

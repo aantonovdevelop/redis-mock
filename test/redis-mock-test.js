@@ -376,6 +376,25 @@ describe('Redis', function () {
             });
         });
     });
+
+    describe('#hdel', function () {
+        it('Should delete hash field', function (done) {
+            redis.store = [];
+
+            var key = 'hashkey';
+
+            redis.store[key] = {
+                somefield: 1
+            };
+
+            redis.hdel(key, 'somefield', function (error) {
+                assert.equal(error, null);
+                assert.equal(redis.store[key].somefield, null);
+
+                done();
+            });
+        });
+    });
     
     describe('#watch', function () {
         it('Should exec callback function', function (done) {
