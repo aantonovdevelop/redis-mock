@@ -174,6 +174,25 @@ function Redis() {
         return callback(null, result);
     };
 
+    this.sdiff = function (keys, callback) {
+        if (!this.store[keys[0]]) return callback(new Error("Key " + keys[0] + " not exist"));
+
+        var self = this,
+            result = self.store[keys[0]];
+
+        keys.splice(0, 1);
+
+        keys.forEach(function (key) {
+            if (self.store[key])
+            self.store[key].forEach(function (item) {
+                var index = result.indexOf(item);
+                if (result.indexOf(item) >= 0) result.splice(index, 1);
+            });
+        });
+
+        callback(null, result);
+    };
+
     this.hset = function (key, field, value, callback) {
 
         if (!key || !field || !value) {

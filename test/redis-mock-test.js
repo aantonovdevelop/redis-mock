@@ -281,6 +281,26 @@ describe('Redis', function () {
         });
     });
 
+    describe('#sdiff', function () {
+        it('Should return difference of sets', function (done) {
+            var test_key_1 = 'test_key_1',
+                test_key_2 = 'test_key_2',
+                test_key_3 = 'test_key_3';
+
+            redis.store[test_key_1] = [1, 5];
+            redis.store[test_key_2] = [2, 3];
+            redis.store[test_key_3] = [1, 4];
+
+            redis.sdiff([test_key_1, test_key_2, test_key_3], function (error, result) {
+                assert.equal(error, null);
+                assert.equal(result.length, 1);
+                assert.equal(result[0], 5);
+
+                done();
+            });
+        });
+    });
+
     describe('#hset', function () {
         var hashkey = 'hashkey';
 
