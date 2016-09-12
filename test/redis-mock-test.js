@@ -262,6 +262,25 @@ describe('Redis', function () {
         });
     });
 
+    describe('#sunion', function () {
+        it('Should return union of three sets', function (done) {
+            var test_key_1 = 'test_key_1',
+                test_key_2 = 'test_key_2',
+                test_key_3 = 'test_key_3';
+
+            redis.store[test_key_1] = [1];
+            redis.store[test_key_2] = [2, 3];
+            redis.store[test_key_3] = [1, 4];
+
+            redis.sunion([test_key_1, test_key_2, test_key_3], function (error, result) {
+                assert.equal(error, null);
+                assert.equal(result.length, 4);
+
+                done();
+            });
+        });
+    });
+
     describe('#hset', function () {
         var hashkey = 'hashkey';
 
@@ -424,7 +443,7 @@ describe('Redis', function () {
         });
     });
 
-    describe('keys', function () {
+    describe('#keys', function () {
         it('Should return keys by pattern', function (done) {
             redis.store['test:key:1'] = 1;
             redis.store['test:key:2'] = 1;

@@ -159,6 +159,21 @@ function Redis() {
         }
     };
 
+    this.sunion = function (keys, callback) {
+        var self = this,
+            result = [];
+
+        keys.forEach(function (key) {
+            if (!self.store[key]) return callback(new Error("Key " + key + " is not exist"), null);
+
+            self.store[key].forEach(function (item) {
+                if (result.indexOf(item) < 0) result.push(item);
+            });
+        });
+
+        return callback(null, result);
+    };
+
     this.hset = function (key, field, value, callback) {
 
         if (!key || !field || !value) {
