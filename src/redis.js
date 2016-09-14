@@ -183,7 +183,7 @@ function Redis() {
         keys.splice(0, 1);
 
         keys.forEach(function (key) {
-            if (self.)
+            if (self.store[key])
             self.store[key].forEach(function (item) {
                 var index = result.indexOf(item);
                 if (result.indexOf(item) >= 0) result.splice(index, 1);
