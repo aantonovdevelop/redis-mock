@@ -107,7 +107,7 @@ function Redis() {
     };
 
     this.smembers = function (key, callback) {
-        this.store[key] instanceof Array ? callback(null, this.store[key]) : callback(new Error(), null);
+        this.store[key] instanceof Array ? callback(null, this.store[key]) : callback(null, null);
     };
     
     this.sismember = function (key, item, callback) {
@@ -183,7 +183,7 @@ function Redis() {
         keys.splice(0, 1);
 
         keys.forEach(function (key) {
-            if (self.store[key])
+            if (self.)
             self.store[key].forEach(function (item) {
                 var index = result.indexOf(item);
                 if (result.indexOf(item) >= 0) result.splice(index, 1);
