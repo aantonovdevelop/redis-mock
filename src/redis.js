@@ -71,7 +71,7 @@ function Redis() {
         var self = this;
         
         function save_value(arr, value) {
-            arr.push(value);
+            if (arr.indexOf(value) < 0) arr.push(value);
         }
 
         if (this.store[key]) {

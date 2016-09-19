@@ -135,6 +135,23 @@ describe('Redis', function () {
                 done();
             });
         });
+
+        it('Should replace old value if equal value is exist', function (done) {
+            var test_key = 'test_key';
+            var test_value = 1;
+
+            redis.sadd(test_key, test_value, function (error) {
+                if (error) return done(error);
+
+                redis.sadd(test_key, test_value, function (error) {
+                    if (error) return done(error);
+
+                    assert.equal(redis.store[test_key].length, 1);
+
+                    done();
+                });
+            });
+        });
     });
 
     describe('#smembers', function () {
